@@ -1,11 +1,11 @@
-import { LATEST_EMOJI_VERSION } from '../constants';
+import { LATEST_SUPPORTED_EMOJI_VERSION } from '../constants';
 import fetch, { RequestInit } from 'node-fetch';
 import parseEmojiList from './parsers/parseEmojiList';
 import path from 'path';
 import fs from 'fs-extra';
 
 const CACHE_FOLDER = path.resolve(__dirname, '../../cache');
-const FILENAME = `${LATEST_EMOJI_VERSION}/emoji-source-list.json`;
+const FILENAME = `${LATEST_SUPPORTED_EMOJI_VERSION}/emoji-source-list.json`;
 
 const readCache = (name: string): string | null => {
     const cachePath = path.resolve(CACHE_FOLDER, name);
@@ -22,7 +22,7 @@ const readCache = (name: string): string | null => {
 
 export const loadEmojiList = async () => {
     let text = '';
-    const url = `https://unicode.org/emoji/charts-${LATEST_EMOJI_VERSION}/emoji-list.html`;
+    const url = `https://unicode.org/emoji/charts-${LATEST_SUPPORTED_EMOJI_VERSION}/emoji-list.html`;
     const cache = readCache(FILENAME);
 
     if (!cache) {
