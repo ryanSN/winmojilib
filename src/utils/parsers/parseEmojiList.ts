@@ -1,5 +1,8 @@
 import cheerio from 'cheerio';
 import slug from '../../helpers/slug';
+import toSnakeCase from '../../helpers/snakeCase';
+import { EXCLUDED_SUBGROUPS } from '../../constants';
+import { chartreuse } from 'color-name';
 
 interface GroupNameMap {
     [name: string]: number;
@@ -47,13 +50,10 @@ const parseEmojiList = (content: string) => {
             const subgroupRow = tr.find('.mediumhead');
             const headerRow = tr.find('.center');
 
-            console.log('group1', group);
             // Group
             if (groupRow.length > 0) {
                 groupName = slug(groupRow.find('a').text());
-                console.log('groupName', groupName);
-                group = groupName; //groups['groupName'];
-                console.log('group', group);
+                group = groupName;
                 // Subgroup
             } else if (subgroupRow.length > 0) {
                 subgroupName = slug(subgroupRow.find('a').text());
@@ -62,22 +62,33 @@ const parseEmojiList = (content: string) => {
             } else if (headerRow.length > 0) {
                 // Skip emoji
             } else {
+                if (EXCLUDED_SUBGROUPS.includes(subgroup)) {
+                    return;
+                }
                 const hexcode = String(tr.find('.code').find('a').attr('name'))
                     .toUpperCase()
                     .replace(/_/g, '-');
                 const name = tr.find('.name').eq(0).text();
+                const keywords = tr
+                    .find('.name')
+                    .eq(1)
+                    .text()
+                    .split('|')
+                    .map((item) => {
+                        return item.trim();
+                    });
 
                 // Recently added, not in an official emoji release
                 if (name.includes('⊛')) {
                     return;
                 }
-
-                // Skip emojis that are hidden
-                // if (HIDDEN_GROUPS.includes(groupName) || HIDDEN_SUBGROUPS.includes(subgroupName)) {
-                //   return;
-                // }
+                const chars = hexcode.split('-').map((i) => parseInt(i.trim(), 16));
+                const char = String.fromCodePoint(...chars);
 
                 data[hexcode] = {
+                    char,
+                    keywords,
+                    name: toSnakeCase(name),
                     group,
                     hexcode,
                     subgroup,
@@ -85,7 +96,6 @@ const parseEmojiList = (content: string) => {
             }
         });
 
-    console.log('data', data);
     return data;
 };
 
