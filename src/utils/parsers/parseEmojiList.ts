@@ -2,39 +2,9 @@ import cheerio from 'cheerio';
 import slug from '../../helpers/slug';
 import toSnakeCase from '../../helpers/snakeCase';
 import { EXCLUDED_SUBGROUPS } from '../../constants';
-import { chartreuse } from 'color-name';
-
-interface GroupNameMap {
-    [name: string]: number;
-}
-
-interface GroupIndexMap {
-    [index: string]: string;
-}
-
-interface GroupCache {
-    groups: GroupIndexMap;
-    subgroups: GroupIndexMap;
-}
-
-function swapKeyValues(data: GroupIndexMap): GroupNameMap {
-    const object: GroupNameMap = {};
-
-    //console.log('dataKey', data);
-    if (data) {
-        Object.keys(data).forEach((key) => {
-            object[data[key]] = Number(key);
-        });
-    }
-
-    return object;
-}
 
 const parseEmojiList = (content: string) => {
     const xml = cheerio.load(content, { xmlMode: true });
-    const groupCache = {} as GroupCache;
-    const groups = {};
-    const subgroups = {};
     const data = {} as any;
     let group = '';
     let groupName = '';
