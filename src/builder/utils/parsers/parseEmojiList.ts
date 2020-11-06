@@ -49,16 +49,17 @@ const parseEmojiList = (content: string) => {
                     });
 
                 // Recently added, not in an official emoji release
-                if (name.includes('⊛')) {
+                if (!name || name.includes('⊛')) {
                     return;
                 }
                 const chars = hexcode.split('-').map((i) => parseInt(i.trim(), 16));
                 const char = String.fromCodePoint(...chars);
+                const normalizedName = toSnakeCase(name) as string;
 
-                data[hexcode] = {
+                data[normalizedName] = {
                     char,
                     keywords,
-                    name: toSnakeCase(name),
+                    name: normalizedName,
                     group,
                     hexcode,
                     subgroup,

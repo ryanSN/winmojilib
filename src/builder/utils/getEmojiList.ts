@@ -4,7 +4,7 @@ import parseEmojiList from './parsers/parseEmojiList';
 import path from 'path';
 import fs from 'fs-extra';
 
-const CACHE_FOLDER = path.resolve(__dirname, '../../cache');
+const CACHE_FOLDER = path.resolve(__dirname, '../../../cache');
 const FILENAME = `${LATEST_SUPPORTED_EMOJI_VERSION}/emoji-source-list.json`;
 
 const readCache = (name: string): string | null => {
