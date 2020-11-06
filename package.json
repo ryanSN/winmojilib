@@ -1,16 +1,27 @@
 {
     "name": "winmojilib",
     "version": "1.0.0",
-    "main": "src/index.ts",
+    "main": "./dist/index.js",
     "repository": "git@github.com:ryanSN/winmojilib.git",
     "author": "ryanSn",
     "license": "MIT",
+    "keywords": [
+        "node",
+        "emoji",
+        "emojis",
+        "winmoji",
+        "unicode",
+        "windows",
+        "js"
+    ],
     "scripts": {
-        "compile": "tsc",
+        "compile": "tsc --build --clean",
         "start": "ts-node src/builder/build.ts",
         "prettier": "prettier --check src/**/*.{js,ts,tsx}",
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
-        "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+        "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+        "prepublish": "yarn run compile",
+        "prepare": "yarn compile"
     },
     "devDependencies": {
         "@types/cheerio": "^0.22.22",
@@ -30,6 +41,7 @@
         "ts-node": "^9.0.0",
         "typescript": "^4.0.3"
     },
+    "dependencies": {},
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged"
@@ -38,5 +50,10 @@
     "lint-staged": {
         "*.{js,css,md}": "prettier --write"
     },
-    "dependencies": {}
+    "engines": {
+        "node": ">=12"
+    },
+    "files": [
+        "dist/**/*"
+    ]
 }
