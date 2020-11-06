@@ -6,7 +6,8 @@
     "author": "ryanSn",
     "license": "MIT",
     "scripts": {
-        "start": "ts-node src/index.ts",
+        "compile": "tsc",
+        "start": "ts-node src/builder/build.ts",
         "prettier": "prettier --check src/**/*.{js,ts,tsx}",
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
         "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
