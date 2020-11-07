@@ -68,3 +68,5 @@ cache
 .tern-port
 
 data
+
+.npmrc
