@@ -67,6 +67,4 @@ cache
 # TernJS port file
 .tern-port
 
-data
-
 .npmrc

@@ -1,5 +1,5 @@
-import emojis from '../data/12.0/emoji-list-data.json';
+import lib from '../data/12.0/emoji-list-data-min.json';
 
-module.exports = {
-    lib: emojis,
-};
+export {
+    lib
+}
