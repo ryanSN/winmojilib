@@ -1,6 +1,6 @@
 {
     "name": "winmojilib",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": "git@github.com:ryanSN/winmojilib.git",
@@ -18,8 +18,8 @@
     "scripts": {
         "clean": "rimraf ./dist/**/*",
         "clean:cache": " rimraf ./cache/**/*",
-        "compile": "yarn clean && tsc --build",
-        "start": "rimraf ./data/**/* && ts-node src/builder/build.ts",
+        "compile": "yarn clean && tsc",
+        "start": "rimraf ./src/data/**/* && ts-node src/builder/build.ts",
         "prettier": "prettier --check src/**/*.{js,ts,tsx}",
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
         "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
