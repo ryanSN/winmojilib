@@ -13,7 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Publish
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: yarn && yarn compile && yarn publish
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: | 
-         yarn && yarn compile && yarn publish
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
