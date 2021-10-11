@@ -24,7 +24,8 @@
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
         "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "prepublish": "yarn run compile",
-        "prepare": "yarn compile"
+        "prepare": "yarn compile && husky install",
+        "pre-commit": "lint-staged"
     },
     "devDependencies": {
         "@types/cheerio": "^0.22.22",
@@ -32,12 +33,12 @@
         "@types/node-fetch": "^2.5.7",
         "@typescript-eslint/eslint-plugin": "^4.3.0",
         "@typescript-eslint/parser": "^4.3.0",
-        "cheerio": "^1.0.0-rc.3",
-        "eslint": "^7.10.0",
+        "cheerio": "1.0.0-rc.10",
+        "eslint": "^8.0.0",
         "eslint-config-prettier": "^6.12.0",
         "eslint-plugin-prettier": "^3.1.4",
         "fs-extra": "^9.0.1",
-        "husky": "^4.3.0",
+        "husky": "^7.0.0",
         "lint-staged": "^10.4.0",
         "node-fetch": "^2.6.1",
         "prettier": "2.1.2",
@@ -46,15 +47,13 @@
         "typescript": "^4.0.3"
     },
     "dependencies": {},
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
     "lint-staged": {
         "*.{js,css,md}": "prettier --write"
     },
     "files": [
         "dist/**/*"
-    ]
+    ],
+    "engines": {
+        "node": ">=16.0.0"
+    }
 }
